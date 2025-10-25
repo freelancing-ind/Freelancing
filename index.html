@@ -3,298 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TECHNICSPOT - The Future of Connectivity</title>
+    <title>NEXTGEN Websites - Dynamic Design & Development</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Google Fonts: Inter for body, Orbitron for headings/logo -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <!-- Load Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* Custom CSS to inject the fonts */
-        .font-orbitron {
-            font-family: 'Orbitron', sans-serif;
-        }
-        .font-inter {
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Define a custom animation for the hero text/logo */
-        @keyframes fadeInSlide {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Base styling and Poppins font configuration */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0c101c; /* Deep dark blue/slate base */
+            overflow-x: hidden;
+            color: #e2e8f0;
+            scroll-behavior: smooth;
         }
 
-        /* Define a subtle animation for the background grid */
-        @keyframes pulseBackground {
+        /* ------------------------------------- */
+        /* 1. ANIMATED BACKGROUND STYLING (MORE DYNAMIC) */
+        /* ------------------------------------- */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.8;
+        }
+
+        .gradient-sphere {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px); /* Increased blurring for more ethereal look */
+            animation: moveGradient 25s infinite alternate ease-in-out;
+        }
+
+        /* Specific sphere definitions (colors optimized for dark theme) */
+        .sphere-1 { width: 350px; height: 350px; background: linear-gradient(135deg, #a78bfa, #6366f1); top: 10%; left: 5%; animation-delay: 0s; }
+        .sphere-2 { width: 450px; height: 450px; background: linear-gradient(45deg, #1d99d3, #06b6d4); bottom: 10%; right: 10%; animation-delay: 8s; }
+        .sphere-3 { width: 300px; height: 300px; background: linear-gradient(90deg, #f472b6, #e879f9); top: 50%; right: 15%; animation-delay: 17s; }
+
+        @keyframes moveGradient {
+            /* Increased movement and scale for a more dramatic animation */
+            0% { transform: translate(0, 0) scale(1.0); opacity: 0.8; }
+            33% { transform: translate(30vw, 25vh) scale(1.1); opacity: 1; }
+            66% { transform: translate(-20vw, -20vh) scale(0.9); opacity: 0.9; }
+            100% { transform: translate(0, 0) scale(1.0); opacity: 0.8; }
+        }
+
+        /* ------------------------------------- */
+        /* 2. MAIN TITLE ANIMATION */
+        /* ------------------------------------- */
+        @keyframes color-shift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        .animated-bg {
-            background: linear-gradient(-45deg, #111827, #000000, #1f2937, #000000);
-            background-size: 400% 400%;
-            animation: pulseBackground 15s ease infinite;
+        .animated-heading {
+            background-image: linear-gradient(90deg, #ff0099, #4933ff, #00d9ff, #ff0099);
+            background-size: 300% 100%;
+            animation: color-shift 8s ease infinite;
         }
 
-        /* Class for scroll-triggered fade in (used in JS) */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            will-change: opacity, transform;
+        /* ------------------------------------- */
+        /* 3. CARD GLOW ON HOVER (MORE TRANSPARENT GLASS) */
+        /* ------------------------------------- */
+        .content-card {
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(20px); /* Increased blur for stronger glass effect */
+            background-color: rgba(30, 41, 59, 0.5); /* Reduced opacity for more transparency */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease-in-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 2.5rem;
         }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+
+        .content-card:hover {
+            transform: translateY(-12px) scale(1.04); /* Increased lift and scale for dynamic feel */
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Custom Glow Effect using a pseudo-element border */
+        .content-card::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 2.75rem;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease-in-out;
+            background: linear-gradient(45deg, #ff00d9, #00d9ff, #4933ff, #ff00d9);
+            filter: blur(10px);
+        }
+
+        .content-card:hover::after {
+            opacity: 0.8; /* Increased glow opacity */
+        }
+
+        /* 4. HOVER-TRIGGERED ICON ANIMATIONS */
+        @keyframes flash {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        @keyframes bounce-custom {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes spin-fast {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         
-        /* Custom dark accent color */
-        .accent-blue {
-            --tw-bg-opacity: 1;
-            background-color: rgb(0 255 255 / var(--tw-bg-opacity)); /* Cyan accent for B&W theme */
-        }
+        .group:hover .animate-flash-on-hover { animation: flash 0.5s ease 2; }
+        .group:hover .animate-bounce-on-hover { animation: bounce-custom 1.2s ease 1; }
+        .group:hover .animate-spin-on-hover { animation: spin-fast 1s linear infinite; }
+
     </style>
-    <script>
-        // IIFE for initialization and functionality
-        window.onload = function() {
-            // --- 1. Animation Setup (Intersection Observer for Scroll-In Effects) ---
-            const sections = document.querySelectorAll('.fade-in-section');
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Stop observing once visible
-                    }
-                });
-            }, {
-                rootMargin: '0px',
-                threshold: 0.1 // Trigger when 10% of the section is visible
-            });
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-
-            // --- 2. Menu Toggle for Mobile ---
-            const menuButton = document.getElementById('menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            menuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        };
-
-        // Utility function to scroll to sections (used for nav links)
-        function scrollToSection(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-            // Hide menu on mobile after click
-            document.getElementById('mobile-menu').classList.add('hidden');
-        }
-
-    </script>
 </head>
-<body class="font-inter bg-gray-900 text-white min-h-screen">
+<body class="min-h-screen">
 
-    <!-- Header & Navigation -->
-    <header class="sticky top-0 z-50 bg-black/80 backdrop-blur-sm shadow-xl border-b border-gray-800">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <span class="font-orbitron text-3xl font-extrabold text-white tracking-widest animate-pulse">
-                        TECHNICSPOT
-                    </span>
-                </div>
-                <!-- Desktop Menu -->
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-6 text-sm font-semibold">
-                        <a onclick="scrollToSection('services')" class="text-gray-300 hover:text-cyan-400 px-3 py-2 transition duration-300 cursor-pointer">Services</a>
-                        <a onclick="scrollToSection('features')" class="text-gray-300 hover:text-cyan-400 px-3 py-2 transition duration-300 cursor-pointer">Technology</a>
-                        <a onclick="scrollToSection('pricing')" class="text-gray-300 hover:text-cyan-400 px-3 py-2 transition duration-300 cursor-pointer">Pricing</a>
-                        <a onclick="scrollToSection('contact')" class="bg-cyan-500 hover:bg-cyan-400 text-gray-900 px-4 py-2 rounded-full transition duration-300 shadow-lg hover:shadow-cyan-400/50 cursor-pointer">Contact Sales</a>
-                    </div>
-                </div>
-                <!-- Mobile Menu Button -->
-                <div class="-mr-2 flex md:hidden">
-                    <button id="menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none transition duration-150">
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </nav>
-        <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="md:hidden hidden border-t border-gray-800">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a onclick="scrollToSection('services')" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Services</a>
-                <a onclick="scrollToSection('features')" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Technology</a>
-                <a onclick="scrollToSection('pricing')" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer">Pricing</a>
-                <a onclick="scrollToSection('contact')" class="bg-cyan-500 text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition duration-300 cursor-pointer">Contact Sales</a>
-            </div>
-        </div>
-    </header>
+    <!-- Animated Background Container -->
+    <div class="animated-bg">
+        <div class="gradient-sphere sphere-1"></div>
+        <div class="gradient-sphere sphere-2"></div>
+        <div class="gradient-sphere sphere-3"></div>
+    </div>
 
-    <main>
-        <!-- 1. Hero Section -->
-        <section class="relative h-[80vh] flex items-center justify-center text-center overflow-hidden animated-bg" id="hero">
-            <div class="max-w-4xl px-4 sm:px-6 lg:px-8 z-10">
-                <h1 class="font-orbitron text-6xl md:text-8xl font-black leading-tight mb-6" style="animation: fadeInSlide 1s ease-out;">
-                    <span class="text-white block">REWIRE YOUR</span>
-                    <span class="text-cyan-400 block mt-2">CONNECTION</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto" style="animation: fadeInSlide 1s ease-out 0.3s forwards; opacity: 0;">
-                    Unbreakable fiber optic technology delivered with precision and speed. Experience true digital performance.
-                </p>
-                <a onclick="scrollToSection('pricing')" style="animation: fadeInSlide 1s ease-out 0.6s forwards; opacity: 0;" class="inline-block bg-white text-gray-900 font-bold text-lg py-3 px-8 rounded-full shadow-2xl hover:bg-cyan-400 hover:text-black transition duration-300 transform hover:scale-105 cursor-pointer">
-                    Explore Plans
+    <!-- Main Content Wrapper -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <!-- Header/Navigation (Branded as NEXTGEN) -->
+        <header class="mb-20">
+            <nav class="flex justify-between items-center content-card p-4 rounded-[2.5rem]">
+                <div class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 transform hover:scale-105 transition-transform duration-500">
+                    NEXTGEN
+                </div>
+                <!-- Enhanced hover effect on CTA button -->
+                <a href="#contact" class="px-7 py-3 bg-gradient-to-r from-fuchsia-600 to-violet-700 text-white font-semibold rounded-full hover:from-fuchsia-500 hover:to-violet-600 transition-all shadow-lg transform hover:shadow-2xl hover:translate-y-[-4px] hover:scale-105">
+                    Launch Your Vision &nbsp; →
                 </a>
-            </div>
-            <!-- Subtly animated elements (black and white theme) -->
-            <div class="absolute inset-0 z-0 opacity-10">
-                <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.1" />
-                    </pattern>
-                    <rect width="100%" height="100%" fill="url(#grid)" class="text-gray-700" />
-                </svg>
-            </div>
+            </nav>
+        </header>
+
+        <!-- 1. Hero Section -->
+        <section class="text-center mb-32 pt-16">
+            <h1 class="text-6xl sm:text-7xl lg:text-8xl font-black mb-6 leading-tight bg-clip-text text-transparent animated-heading">
+                Crafting Digital Momentum.
+            </h1>
+            <p class="text-xl max-w-3xl mx-auto text-gray-300 mb-10">
+                We craft bespoke, fully animated, and lightning-fast digital experiences that capture attention and drive conversions. Forget static pages—this is the future of online presence.
+            </p>
+            <a href="#examples" id="portfolio-link" class="inline-block px-10 py-4 text-lg font-bold rounded-full text-white transition-all transform hover:scale-105 shadow-2xl bg-gradient-to-r from-cyan-500 to-teal-500">
+                View Dynamic Portfolio ↓
+            </a>
         </section>
 
-        <!-- 2. Services Section (Cards) -->
-        <section class="py-20 bg-black/90" id="services">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="font-orbitron text-4xl font-bold text-center text-white mb-12 fade-in-section">
-                    Our Core Services
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                    <!-- Service Card 1: Fiber Internet -->
-                    <div class="fade-in-section bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700 hover:shadow-cyan-400/30 transform hover:scale-[1.02] transition duration-300">
-                        <div class="text-cyan-400 text-5xl mb-4">
-                            <!-- SVG Icon for Speed -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </div>
-                        <h3 class="font-orbitron text-2xl font-semibold text-white mb-3">High-Speed Fiber</h3>
-                        <p class="text-gray-400">Dedicated symmetrical speeds for heavy lifting, streaming 8K, and lag-free gaming. Our infrastructure is built for the future.</p>
-                        <a href="#" class="inline-block mt-4 text-cyan-400 hover:text-white transition duration-200 text-sm font-semibold">Learn More &rarr;</a>
-                    </div>
-
-                    <!-- Service Card 2: Digital TV -->
-                    <div class="fade-in-section bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700 hover:shadow-cyan-400/30 transform hover:scale-[1.02] transition duration-300 delay-100">
-                        <div class="text-cyan-400 text-5xl mb-4">
-                            <!-- SVG Icon for Entertainment -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.55-4.55a1 1 0 011.414 1.414L16.414 12l4.55 4.55a1 1 0 01-1.414 1.414L15 13.414l-4.55 4.55a1 1 0 01-1.414-1.414L13.586 12 9.036 7.45a1 1 0 111.414-1.414L15 10z" />
-                            </svg>
-                        </div>
-                        <h3 class="font-orbitron text-2xl font-semibold text-white mb-3">Premium Digital TV</h3>
-                        <p class="text-gray-400">HD and 4K channels with interactive guides and DVR services. Local and international packages tailored for you.</p>
-                        <a href="#" class="inline-block mt-4 text-cyan-400 hover:text-white transition duration-200 text-sm font-semibold">View Packages &rarr;</a>
-                    </div>
-
-                    <!-- Service Card 3: Enterprise Solutions -->
-                    <div class="fade-in-section bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700 hover:shadow-cyan-400/30 transform hover:scale-[1.02] transition duration-300 delay-200">
-                        <div class="text-cyan-400 text-5xl mb-4">
-                            <!-- SVG Icon for Business -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-1.28-8.455-3.745M12 21V3" />
-                            </svg>
-                        </div>
-                        <h3 class="font-orbitron text-2xl font-semibold text-white mb-3">Enterprise Connectivity</h3>
-                        <p class="text-gray-400">Scalable, dedicated network solutions for businesses. Guaranteed uptime, security, and 24/7 priority support.</p>
-                        <a href="#" class="inline-block mt-4 text-cyan-400 hover:text-white transition duration-200 text-sm font-semibold">Business Inquiry &rarr;</a>
-                    </div>
+        <!-- 2. Services Highlights -->
+        <section class="mb-32">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Why Choose Dynamic Design?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: Engagement (Animation on hover) -->
+                <div class="content-card p-8 text-center group">
+                    <svg class="w-12 h-12 text-cyan-400 mx-auto mb-4 animate-flash-on-hover" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <h3 class="text-2xl font-semibold mb-3 text-cyan-300">Boost Engagement</h3>
+                    <p class="text-gray-400">Dynamic visuals keep visitors on your page longer, reducing bounce rates and communicating your brand's energy effectively.</p>
+                </div>
+                <!-- Card 2: Modern Aesthetics (Animation on hover) -->
+                <div class="content-card p-8 text-center group">
+                    <svg class="w-12 h-12 text-purple-400 mx-auto mb-4 animate-bounce-on-hover" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4M17 19h4M17 3l4 4M20 5l-4 4m-4-4l-4 4m9-10l-4 4m-4 4l-4 4m-3 3l4-4M12 12v.01"></path></svg>
+                    <h3 class="text-2xl font-semibold mb-3 text-purple-300">Modern Aesthetic</h3>
+                    <p class="text-gray-400">We utilize the latest in glassmorphism, motion graphics, and colorful themes to give your site a cutting-edge, premium feel.</p>
+                </div>
+                <!-- Card 3: Performance (Animation on hover) -->
+                <div class="content-card p-8 text-center group">
+                    <svg class="w-12 h-12 text-pink-400 mx-auto mb-4 animate-spin-on-hover" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.5 7.5L12 3L3.5 7.5L12 12L20.5 7.5Z M3.5 7.5V16.5L12 21L20.5 16.5V7.5"></path></svg>
+                    <h3 class="text-2xl font-semibold mb-3 text-pink-300">Optimized Performance</h3>
+                    <p class="text-gray-400">Our animations are optimized for speed, ensuring a stunning visual experience without sacrificing loading times or responsiveness.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 3. Feature Section (High-Contrast White Section) -->
-        <section class="py-20 bg-white text-gray-900" id="features">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="md:grid md:grid-cols-2 md:gap-12 items-center">
-                    <!-- Text Content -->
-                    <div class="fade-in-section mb-10 md:mb-0">
-                        <span class="text-sm font-semibold text-cyan-600 uppercase tracking-widest">Technicspot Advantage</span>
-                        <h2 class="font-orbitron text-4xl font-bold mt-2 mb-4">
-                            Beyond Wires: Our Zero-Downtime Promise
-                        </h2>
-                        <p class="text-gray-600 text-lg mb-6">
-                            We don't just provide speed; we provide stability. Our network architecture is designed with redundancy at every point, ensuring that your connection is always on, even when others fail.
+        <!-- 3. Example Websites (Portfolio) -->
+        <section id="examples" class="mb-32">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Our Recent Project Concepts</h2>
+            <p class="text-xl text-center max-w-3xl mx-auto text-gray-300 mb-16">
+                Below are six examples of the distinct, colorful, and highly interactive websites we deliver across different industries.
+            </p>
+
+            <div class="space-y-16">
+                <!-- Example 1: E-Commerce Platform (Future-Tech) -->
+                <div class="content-card p-8 flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-1/2 mb-6 lg:mb-0 lg:pr-8">
+                        <span class="text-sm font-semibold uppercase tracking-widest text-cyan-400 mb-2 block">E-COMMERCE & RETAIL</span>
+                        <h3 class="text-4xl font-bold mb-4 text-cyan-200">The "Aether" Storefront</h3>
+                        <p class="text-gray-400 mb-4">
+                            A minimalist e-commerce design focused on product visuals. Features subtle parallax scrolling, fluid checkout transitions, and a **spectrum gradient** on all interactive buttons that shifts color based on mouse position.
                         </p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <span class="flex-shrink-0 text-cyan-500 font-bold mr-3">&gt;</span>
-                                <span class="font-semibold">Pure Fiber Optic Backbone:</span> No shared copper lines slowing you down.
-                            </li>
-                            <li class="flex items-start">
-                                <span class="flex-shrink-0 text-cyan-500 font-bold mr-3">&gt;</span>
-                                <span class="font-semibold">Next-Gen Encryption:</span> Secure connections for your home and business.
-                            </li>
-                            <li class="flex items-start">
-                                <span class="flex-shrink-0 text-cyan-500 font-bold mr-3">&gt;</span>
-                                <span class="font-semibold">24/7 Human Support:</span> Get help from an expert, not a bot.
-                            </li>
+                        <ul class="list-disc list-inside space-y-1 text-gray-400">
+                            <li>Glassmorphic Product Cards</li>
+                            <li>Interactive 3D Model Viewers (Mockup)</li>
+                            <li>Ultra-Fast Single Page App (SPA) feel</li>
                         </ul>
                     </div>
+                    <div class="lg:w-1/2 bg-gray-900 h-64 rounded-2xl p-4 flex items-center justify-center border-2 border-cyan-500/50 shadow-inner">
+                        <p class="text-cyan-500 font-mono text-xl animate-pulse">
+                            &lt;Future Tech E-Comm Mockup /&gt;
+                        </p>
+                    </div>
+                </div>
 
-                    <!-- Image/Visual Placeholder (Styled for B&W theme) -->
-                    <div class="fade-in-section flex justify-center items-center h-96 bg-gray-100 rounded-2xl shadow-lg border border-gray-300">
-                        <div class="text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-500 mx-auto mb-3 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3L21 14.25H3M9.75 3v11.25M21 14.25v-11.25m-6.75 11.25h-4.5m4.5 0v-4.5" />
-                            </svg>
-                            <p class="text-gray-500 font-inter font-medium">Network Architecture Diagram Placeholder</p>
-                        </div>
+                <!-- Example 2: Corporate/SaaS Landing Page (Professional Dynamic) -->
+                <div class="content-card p-8 flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-1/2 mb-6 lg:mb-0 lg:pr-8 order-2 lg:order-1">
+                        <span class="text-sm font-semibold uppercase tracking-widest text-purple-400 mb-2 block">SAAS & CORPORATE</span>
+                        <h3 class="text-4xl font-bold mb-4 text-purple-200">"Nexus" Platform Landing</h3>
+                        <p class="text-gray-400 mb-4">
+                            A highly professional yet dynamic landing page for a B2B software solution. Uses clean lines with colorful, controlled motion graphics to explain complex features. Key elements "pop" into view as the user scrolls, creating a guided narrative experience.
+                        </p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-400">
+                            <li>Animated Feature Explanations</li>
+                            <li>Subtle Micro-interactions on Icons</li>
+                            <li>Dark-Mode First Design</li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/2 bg-gray-900 h-64 rounded-2xl p-4 flex items-center justify-center border-2 border-purple-500/50 shadow-inner order-1 lg:order-2">
+                        <p class="text-purple-500 font-mono text-xl animate-bounce-slow" style="animation-duration: 4s;">
+                            &lt;SaaS Feature Scroll Animation /&gt;
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Example 3: Personal Brand/Artist Portfolio (Vibrant & Expressive) -->
+                <div class="content-card p-8 flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-1/2 mb-6 lg:mb-0 lg:pr-8">
+                        <span class="text-sm font-semibold uppercase tracking-widest text-pink-400 mb-2 block">ART & PERSONAL BRAND</span>
+                        <h3 class="text-4xl font-bold mb-4 text-pink-200">The "Prism" Portfolio</h3>
+                        <p class="text-gray-400 mb-4">
+                            A vibrant, high-energy portfolio for creative professionals. Uses a shifting, semi-transparent color overlay over the entire page controlled by the user's cursor movement, providing a truly unique and memorable experience.
+                        </p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-400">
+                            <li>Mouse-Controlled Hue Shifts</li>
+                            <li>Asymmetrical Layouts</li>
+                            <li>Large, Bold Typography</li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/2 bg-gray-900 h-64 rounded-2xl p-4 flex items-center justify-center border-2 border-pink-500/50 shadow-inner">
+                        <p class="text-pink-500 font-mono text-xl animate-pulse">
+                            &lt;Creative Portfolio Interactive Mock /&gt;
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Example 4: Media/Blog Platform (Editorial Focus) - NEW CARD -->
+                <div class="content-card p-8 flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-1/2 mb-6 lg:mb-0 lg:pr-8 order-2 lg:order-1">
+                        <span class="text-sm font-semibold uppercase tracking-widest text-teal-400 mb-2 block">CONTENT & MEDIA</span>
+                        <h3 class="text-4xl font-bold mb-4 text-teal-200">The "Echo" Editorial Hub</h3>
+                        <p class="text-gray-400 mb-4">
+                            A fast, typography-focused platform designed for large-scale content delivery. Features an infinite scroll, subtle category filters that slide in, and a clean, responsive layout for deep reading.
+                        </p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-400">
+                            <li>Typeface-driven Hierarchy</li>
+                            <li>Content-on-scroll Fades</li>
+                            <li>Optimized for Readability on Mobile</li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/2 bg-gray-900 h-64 rounded-2xl p-4 flex items-center justify-center border-2 border-teal-500/50 shadow-inner order-1 lg:order-2">
+                        <p class="text-teal-500 font-mono text-xl animate-pulse">
+                            &lt;Editorial Content Mockup /&gt;
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Example 5: Fintech/Data Dashboard (Secure & Insightful) - NEW CARD -->
+                <div class="content-card p-8 flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-1/2 mb-6 lg:mb-0 lg:pr-8">
+                        <span class="text-sm font-semibold uppercase tracking-widest text-indigo-400 mb-2 block">FINTECH & DATA VISUALS</span>
+                        <h3 class="text-4xl font-bold mb-4 text-indigo-200">"Quant" Dashboard Portal</h3>
+                        <p class="text-gray-400 mb-4">
+                            A highly secure, data-intensive dashboard portal. The focus is on clarity and speed, using colorful, animated charts (mockup) that update in real-time and subtle security indicators that pulse gently.
+                        </p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-400">
+                            <li>Real-time Chart Animations (Mockup)</li>
+                            <li>Customizable Widget Layouts</li>
+                            <li>High-Contrast Data Display</li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/2 bg-gray-900 h-64 rounded-2xl p-4 flex items-center justify-center border-2 border-indigo-500/50 shadow-inner">
+                        <p class="text-indigo-500 font-mono text-xl animate-bounce-slow" style="animation-duration: 4s;">
+                            &lt;Animated Chart Mockup /&gt;
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Example 6: Gaming/Entertainment Site (Fast & Immersive) - NEW CARD -->
+                <div class="content-card p-8 flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-1/2 mb-6 lg:mb-0 lg:pr-8 order-2 lg:order-1">
+                        <span class="text-sm font-semibold uppercase tracking-widest text-orange-400 mb-2 block">GAMING & IMMERSIVE</span>
+                        <h3 class="text-4xl font-bold mb-4 text-orange-200">The "Pulse" Gaming Hub</h3>
+                        <p class="text-gray-400 mb-4">
+                            An ultra-responsive platform built for the gaming community. Features fast-loading embedded content, background video loops (mockup), and intense button feedback for an aggressive, dynamic user experience.
+                        </p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-400">
+                            <li>Optimized Asset Loading</li>
+                            <li>Intense Hover Feedback</li>
+                            <li>Full-Screen Modal Transitions</li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/2 bg-gray-900 h-64 rounded-2xl p-4 flex items-center justify-center border-2 border-orange-500/50 shadow-inner order-1 lg:order-2">
+                        <p class="text-orange-500 font-mono text-xl animate-pulse">
+                            &lt;Gaming Video Mockup /&gt;
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. Pricing / CTA Section -->
-        <section class="py-20 bg-gray-900" id="pricing">
-            <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 fade-in-section">
-                <h2 class="font-orbitron text-4xl font-bold text-white mb-4">
-                    Ready to Connect?
+        <!-- 4. Contact Section -->
+        <section id="contact" class="mb-20 pt-16">
+            <div class="content-card p-10 md:p-16 max-w-4xl mx-auto text-center">
+                <h2 class="text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 to-cyan-400">
+                    Ready to Launch Your Vision?
                 </h2>
-                <p class="text-xl text-gray-400 mb-8">
-                    Choose the speed that powers your world. Simple pricing, no hidden fees.
+                <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                    Let's discuss your project's unique needs. We respond to all inquiries within 24 hours.
                 </p>
-                
-                <!-- Pricing Toggle/Option (Card style) -->
-                <div class="bg-gray-800 p-6 rounded-2xl inline-block shadow-2xl border border-gray-700">
-                    <div class="flex space-x-4 items-center">
-                        <div class="text-3xl font-bold font-orbitron text-cyan-400">500 Mbps</div>
-                        <span class="text-gray-500">|</span>
-                        <div class="text-gray-200 text-3xl font-bold font-orbitron">1000 Mbps</div>
-                        <a href="#" class="ml-6 bg-cyan-500 text-gray-900 font-bold py-3 px-6 rounded-full hover:bg-white transition duration-300 transform hover:shadow-lg">
-                            Get Started Now
+
+                <div class="space-y-6">
+                    <!-- Contact Information - STYLED AS 'TABS' -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Email Tab -->
+                        <a href="mailto:contact@nextgenweb.dev" class="p-5 bg-slate-900/50 rounded-2xl border-l-4 border-purple-500 hover:bg-slate-800/80 transition-all group block shadow-lg transform hover:scale-[1.03]">
+                            <p class="text-xs uppercase tracking-widest text-purple-400 font-bold mb-1 group-hover:text-white transition-colors">Digital Inquiry</p>
+                            <p class="text-xl font-semibold text-white group-hover:text-purple-300 transition-colors">
+                                contact@nextgenweb.dev
+                            </p>
+                        </a>
+                        <!-- Phone Tab -->
+                        <a href="tel:+15559028877" class="p-5 bg-slate-900/50 rounded-2xl border-l-4 border-cyan-500 hover:bg-slate-800/80 transition-all group block shadow-lg transform hover:scale-[1.03]">
+                            <p class="text-xs uppercase tracking-widest text-cyan-400 font-bold mb-1 group-hover:text-white transition-colors">Direct Line</p>
+                            <p class="text-xl font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                                +1 (555) 902-8877
+                            </p>
                         </a>
                     </div>
+
+                    <!-- Contact Form (Now Functional with mailto) -->
+                    <form id="contact-form" class="pt-6 max-w-md mx-auto space-y-4">
+                        <!-- Inputs now have IDs for JS access -->
+                        <input type="text" id="nameInput" placeholder="Your Name" class="w-full p-4 rounded-2xl bg-slate-900/70 border border-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all text-white hover:border-purple-500/50">
+                        <input type="email" id="emailInput" placeholder="Your Email Address" class="w-full p-4 rounded-2xl bg-slate-900/70 border border-gray-700 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-white hover:border-cyan-500/50">
+                        <textarea id="messageInput" placeholder="Tell us about your project..." rows="4" class="w-full p-4 rounded-2xl bg-slate-900/70 border border-gray-700 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all text-white hover:border-pink-500/50"></textarea>
+                        
+                        <!-- Status message area for form feedback -->
+                        <div id="status-message" class="text-center text-sm font-medium h-6"></div>
+
+                        <!-- Button uses type="submit" to trigger the JS event listener -->
+                        <button type="submit" class="w-full py-4 text-xl font-bold rounded-2xl text-white transition-all transform hover:scale-[1.01] shadow-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400">
+                            Send Inquiry Now
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
+    </div>
 
-    </main>
+    <!-- SCRIPT FOR SMOOTH SCROLL AND FORM HANDLING -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. Smooth Scroll Handling ---
+            const portfolioLink = document.getElementById('portfolio-link');
+            const targetExamples = document.getElementById('examples');
 
-    <!-- Footer -->
-    <footer class="bg-black border-t border-gray-800 py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-            <div class="font-orbitron text-2xl font-bold text-white mb-4">TECHNICSPOT</div>
-            <div class="flex justify-center space-x-6 text-sm mb-4">
-                <a href="#" class="hover:text-cyan-400 transition duration-150">Privacy Policy</a>
-                <a href="#" class="hover:text-cyan-400 transition duration-150">Terms of Service</a>
-                <a onclick="scrollToSection('contact')" class="hover:text-cyan-400 transition duration-150 cursor-pointer" id="contact">Support</a>
-            </div>
-            <p>&copy; 2025 TECHNICSPOT. All rights reserved. Built with speed and style.</p>
-        </div>
-    </footer>
+            if (portfolioLink && targetExamples) {
+                portfolioLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    targetExamples.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            }
 
+            // --- 2. Mailto Form Submission Handling ---
+            const form = document.getElementById('contact-form');
+            const statusMessage = document.getElementById('status-message');
+
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault(); // Stop default form submission
+
+                    const name = document.getElementById('nameInput').value.trim();
+                    const email = document.getElementById('emailInput').value.trim();
+                    const message = document.getElementById('messageInput').value.trim();
+
+                    // Basic Validation
+                    if (!name || !email || !message) {
+                        statusMessage.textContent = "Please fill out all fields.";
+                        statusMessage.className = "text-center text-sm font-medium h-6 text-pink-400";
+                        return;
+                    }
+
+                    // Reset status class before success
+                    statusMessage.className = "text-center text-sm font-medium h-6 text-cyan-400";
+
+                    // Construct the email body and subject, ensuring proper URL encoding
+                    // Updated brand name in subject line
+                    const subject = encodeURIComponent(`New Project Inquiry from NEXTGEN Website: ${name}`);
+                    const body = encodeURIComponent(
+                        `
+--------------------------------
+New Project Inquiry Details
+--------------------------------
+Name: ${name}
+Email: ${email}
+
+Project Description:
+${message}
+--------------------------------
+                        `
+                    );
+
+                    // Note: Changed the mock mailto address to reflect the new brand for consistency
+                    const mailtoLink = `mailto:contact@nextgenweb.dev?subject=${subject}&body=${body}`;
+
+                    // Display confirmation message
+                    statusMessage.textContent = "Launching your email client...";
+
+                    // Attempt to open the email client
+                    window.location.href = mailtoLink;
+
+                    // Provide final instruction to the user
+                    setTimeout(() => {
+                        statusMessage.textContent = "Email client opened. Please press 'Send' in your mail application.";
+                    }, 1000);
+
+                    // Clear form fields
+                    form.reset();
+                });
+            }
+        });
+    </script>
 </body>
 </html>
